@@ -16,7 +16,7 @@ Extend the NodeJS project provided to you with the following functionality:
       - the ID does not match an ID of a task in the database
       - the database operation does not complete as expected
 
-3. Create the model (including mongoose model) for Comments.
+3. [OPTIONAL] Create the model (including mongoose model) for Comments.
       - Each Comment belongs to exactly one Task - choose an appropriate connection between the two models
       - Each Comment has a non-empty text field containing the content of the comment
       - A Task can have many comments.
