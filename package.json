@@ -6,7 +6,7 @@
   "scripts": {
     "test": "test",
     "lint": "eslint . --ext .ts",
-    "start": "node -r tsconfig-paths/register -r ts-node/register ./src/index.ts",
+    "start": "nodemon --exec ts-node -r tsconfig-paths/register ./src/index.ts",
     "build": "tsc"
   },
   "author": "Sophie Zeissler & Adriel Kirch",
@@ -20,6 +20,7 @@
     "@typescript-eslint/parser": "^5.59.7",
     "eslint": "^8.41.0",
     "eslint-plugin-react": "^7.25.3",
+    "nodemon": "^3.1.0",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
     "typescript": "~5.0.4"
