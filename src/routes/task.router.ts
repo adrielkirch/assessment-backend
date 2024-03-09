@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
 import { Router } from "express-serve-static-core";
-import { TaskService } from "../service/task.service";
+import { CommentService } from "../service/task.service";
 import { Task } from "../model/task";
 import { validateAddTask,validateUpdateTask } from "../validator/task.validator";
 export class TaskRouter {
@@ -11,7 +11,7 @@ export class TaskRouter {
       "/",
       async (_req: Request, res: Response) => {
         try {
-          const result = await TaskService.readAll();
+          const result = await CommentService.readAll();
           res.status(200).json(result).end();
         } catch (error) {
           console.error("Internal server error:", error);
@@ -25,7 +25,7 @@ export class TaskRouter {
       async (req: Request, res: Response) => {
         try {
           const id: string = req.query.id as string; 
-          const result = await TaskService.readOne(id);
+          const result = await CommentService.readOne(id);
           res.status(200).json(result).end();
         } catch (error) {
           console.error("Internal server error:", error);
@@ -40,7 +40,7 @@ export class TaskRouter {
       async (req: Request<Task>, res: Response) => {
         try {
           const requestBody: Task = req.body;
-          const result = await TaskService.createOne(requestBody);
+          const result = await CommentService.createOne(requestBody);
           res.status(200).json(result).end();
         } catch (error) {
           console.error("Internal server error:", error);
@@ -55,7 +55,7 @@ export class TaskRouter {
       async (req: Request<Task>, res: Response) => {
         try {
           const requestBody: Task = req.body;
-          const result = await TaskService.updateOne(requestBody);
+          const result = await CommentService.updateOne(requestBody);
           res.status(200).json(result).end();
         } catch (error) {
           console.error("Internal server error:", error);
@@ -70,7 +70,7 @@ export class TaskRouter {
       async (req: Request, res: Response) => {
         try {
           const id: string = req.query.id as string; 
-          const result = await TaskService.deleteOne(id);
+          const result = await CommentService.deleteOne(id);
           res.status(200).json(result).end();
         } catch (error) {
           console.error("Internal server error:", error);

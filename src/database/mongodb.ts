@@ -22,13 +22,11 @@ class Mongodb {
       return this.db;
     }
 
-
-    const url = 'mongodb://127.0.0.1:27017/development'
+    const url = 'mongodb://127.0.0.1:27017/development';
     
     const options: CustomConnectOptions = {
-      bufferCommands: true,
-      dbName: process.env.NODE_ENV, // Provide your database name here
-      // Add any other desired options here
+      bufferCommands: false, 
+      dbName: process.env.NODE_ENV, 
     };
     
     const connection = await mongoose.connect(url, options);
