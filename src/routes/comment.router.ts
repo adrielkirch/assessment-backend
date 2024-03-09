@@ -1,7 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
 import { Router } from "express-serve-static-core";
 
-export class TaskRouter {
+export class CommentRouter {
 
     public createRoutes(): Router {
         const router = express.Router();
@@ -10,17 +10,15 @@ export class TaskRouter {
           res.status(200).json([
             {
               id: '1',
-              title: 'Task1',
-              text: 'Lorem ipsum',
-              status: 'TODO',
-              createdAt: new Date('2024-02-28')
+              text: "lorem ipsum",
+              email: "test@test.com",
+              createdAt: new Date('2024-02-29')
             },
             {
               id: '2',
-              title: 'Task2',
-              text: 'sit dolor',
-              status: 'DONE',
-              createdAt: new Date('2024-02-29')
+              text: "lorem ipsum 2",
+              email: "test2@test.com",
+              createdAt: new Date('2024-02-28')
             }
           ]).end();
         });
