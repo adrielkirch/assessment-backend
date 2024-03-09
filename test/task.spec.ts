@@ -22,10 +22,11 @@ describe("Test service class", () => {
     });
   });
   after(async () => {
-    await connection.db.dropDatabase();
+    // await connection.db.dropDatabase();
     await connection.close();
     await mongoServer.stop();
   });
+
 
   it("should add one task and return it", async () => {
     const insertedTask = await TaskService.createOne(taskCreate);

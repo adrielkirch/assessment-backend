@@ -10,6 +10,7 @@ const taskCreate: Task = {
   title: "Test",
   text: "This is a test task",
   status: "TODO",
+
 } as Task;
 
 const commentCreate: Comment = {
@@ -17,6 +18,7 @@ const commentCreate: Comment = {
   title: "Test",
   text: "This is a test comment",
   taskId: "",
+  name:"Sophie",
 } as Comment;
 
 
@@ -58,9 +60,10 @@ describe("Test service class", () => {
   });
 
   it("should delete one comment and return id", async () => {
-    const id_deleted = await CommentService.deleteOne(taskCreate.id);
+    const id_deleted = await CommentService.deleteOne(commentCreate.id);
     const result_comments = await CommentService.readAll();
     assert.strictEqual(result_comments.length, 0);
+
   });
   
 });

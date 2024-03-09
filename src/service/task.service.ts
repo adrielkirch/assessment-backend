@@ -1,7 +1,7 @@
 import { Task } from "../model/task";
 import { TaskRepository } from "../repository/task.repository";
 
-export class CommentService {
+export class TaskService {
   public static async createOne(task: Task): Promise<Task> {
     console.log("Creating ...")
     return await TaskRepository.createOne(task);
