@@ -60,10 +60,28 @@ describe("Test service class", () => {
   });
 
   it("should delete one comment and return id", async () => {
-    const id_deleted = await CommentService.deleteOne(commentCreate.id);
+    await CommentService.deleteOne(commentCreate.id);
     const result_comments = await CommentService.readAll();
     assert.strictEqual(result_comments.length, 0);
 
+  });
+
+  it("should throw an error when reading a non-existent comment", async () => {
+    try {
+      await CommentService.readOne("000000000000000000000000");
+      assert.fail("Expected an error to be thrown");
+    } catch (error) {
+      assert.strictEqual(error instanceof Error, true);
+    }
+  });
+
+  it("should throw an error when deleting a non-existent comment", async () => {
+    try {
+      await CommentService.deleteOne("000000000000000000000000");
+      assert.fail("Expected an error to be thrown");
+    } catch (error) {
+      assert.strictEqual(error instanceof Error, true);
+    }
   });
   
 });

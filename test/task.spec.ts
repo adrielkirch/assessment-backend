@@ -47,10 +47,28 @@ describe("Test service class", () => {
   });
 
   it("should delete one task and return id", async () => {
-    const id_deleted = await TaskService.deleteOne(taskCreate.id);
+    await TaskService.deleteOne(taskCreate.id);
     const result_tasks = await TaskService.readAll();
     assert.strictEqual(result_tasks.length, 0);
     
+  });
+
+  it("should throw an error when reading a non-existent task", async () => {
+    try {
+      await TaskService.readOne("000000000000000000000000");
+      assert.fail("Expected an error to be thrown");
+    } catch (error) {
+      assert.strictEqual(error instanceof Error, true);
+    }
+  });
+
+  it("should throw an error when deleting a non-existent task", async () => {
+    try {
+      await TaskService.deleteOne("000000000000000000000000");
+      assert.fail("Expected an error to be thrown");
+    } catch (error) {
+      assert.strictEqual(error instanceof Error, true);
+    }
   });
   
 });
