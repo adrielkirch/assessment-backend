@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
+  
   "scripts": {
-    "test": "test",
+    "test": "mocha -n loader=ts-node/esm -p ./test/**.spec.ts",
     "lint": "eslint . --ext .ts",
-    "start": "nodemon --exec ts-node -r tsconfig-paths/register ./src/index.ts",
+    "start": "nodemon --exec ts-node --esm -r tsconfig-paths/register ./src/index.ts",
     "build": "tsc"
   },
   "author": "Sophie Zeissler & Adriel Kirch",
@@ -17,14 +18,21 @@
     "mongoose": "^8.2.1"
   },
   "devDependencies": {
+    "@types/chai": "^4.3.12",
     "@types/express": "^4.17.17",
+    "@types/mocha": "^10.0.6",
     "@typescript-eslint/eslint-plugin": "^5.59.7",
     "@typescript-eslint/parser": "^5.59.7",
+    "chai": "^5.1.0",
+    "cross-env": "^7.0.3",
     "eslint": "^8.41.0",
     "eslint-plugin-react": "^7.25.3",
+    "mocha": "^10.3.0",
+    "mocha-typescript": "^1.1.17",
     "nodemon": "^3.1.0",
-    "ts-node": "^10.9.1",
+    "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.7.1",
     "typescript": "~5.0.4"
   }
 }

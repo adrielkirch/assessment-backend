@@ -1,44 +1,84 @@
 import express, { NextFunction, Request, Response } from "express";
 import { Router } from "express-serve-static-core";
-import { Task } from "../models/task";
-import { validateAddTask } from "../validators/task";
+import { TaskService } from "../service/task.service";
+import { Task } from "../model/task";
+import { validateAddTask,validateUpdateTask } from "../validator/task.validator";
 export class TaskRouter {
   public createRoutes(): Router {
     const router = express.Router();
 
-    router.get("/", (_req: Request, res: Response, _next: NextFunction) => {
-      res
-        .status(200)
-        .json([
-          {
-            id: "1",
-            title: "Task1",
-            text: "Lorem ipsum",
-            status: "TODO",
-            createdAt: new Date("2024-02-28"),
-          },
-          {
-            id: "2",
-            title: "Task2",
-            text: "sit dolor",
-            status: "DONE",
-            createdAt: new Date("2024-02-29"),
-          },
-        ])
-        .end();
-    });
+    router.get(
+      "/",
+      async (_req: Request, res: Response, _next: NextFunction) => {
+        try {
+          const result = await TaskService.readAll();
+          res.status(200).json(result).end();
+        } catch (error) {
+          console.error("Internal server error:", error);
+          res.status(500).json({ error: "Internal server error" }).end();
+        }
+      }
+    );
+
+    router.get(
+      "/read-one",
+      async (req: Request, res: Response, _next: NextFunction) => {
+        try {
+          const id: string = req.query.id as string; 
+          const result = await TaskService.readOne(id);
+          res.status(200).json(result).end();
+        } catch (error) {
+          console.error("Internal server error:", error);
+          res.status(500).json({ error: "Internal server error" }).end();
+        }
+      }
+    );
 
     router.post(
       "/",
-      (req: Request<Task>, res: Response, _next: NextFunction) => {
-        const requestBody: Task = req.body; 
-        console.log(requestBody)
-        if (!validateAddTask(requestBody)) {
-          return res.status(400).json({ error: "Invalid request body" }).end();
+      [validateAddTask],
+      async (req: Request<Task>, res: Response, _next: NextFunction) => {
+        try {
+          const requestBody: Task = req.body;
+          const result = await TaskService.createOne(requestBody);
+          res.status(200).json(result).end();
+        } catch (error) {
+          console.error("Internal server error:", error);
+          res.status(500).json({ error: "Internal server error" }).end();
         }
-        res.status(200).json(requestBody).end();
       }
     );
+
+    router.put(
+      "/",
+      [validateUpdateTask],
+      async (req: Request<Task>, res: Response, _next: NextFunction) => {
+        try {
+          const requestBody: Task = req.body;
+          const result = await TaskService.updateOne(requestBody);
+          res.status(200).json(result).end();
+        } catch (error) {
+          console.error("Internal server error:", error);
+          res.status(500).json({ error: "Internal server error" }).end();
+        }
+      }
+    );
+
+
+    router.delete(
+      "/",
+      async (req: Request, res: Response, _next: NextFunction) => {
+        try {
+          const id: string = req.query.id as string; 
+          const result = await TaskService.deleteOne(id);
+          res.status(200).json(result).end();
+        } catch (error) {
+          console.error("Internal server error:", error);
+          res.status(500).json({ error: "Internal server error" }).end();
+        }
+      }
+    );
+    
 
     return router;
   }

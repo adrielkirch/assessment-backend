@@ -16,7 +16,7 @@ class AssessmentNous {
       const app = new Application();
       
       await app.init();
-
+  
       app.express.listen(port, () => {
         console.info("*****************************************************************************");
         console.info(`**                         ASSESSMENT NOUS                                 **`);
