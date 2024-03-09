@@ -21,13 +21,14 @@ export class TaskService {
   }
   
   public static async deleteOne(id: string): Promise<any> {
-    const exist = this.readOne(id)
-    if(!exist) {
+    const exist = await this.readOne(id);
+    if (!exist) {
       throw new Error("Task not found");
     }
     await TaskRepository.deleteOne(id);
     return {
       id: id,
-    };
+    }; 
   }
+  
 }

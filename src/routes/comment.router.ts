@@ -13,7 +13,7 @@ export class CommentRouter {
 
     router.get(
       "/",
-      async (_req: Request, res: Response, _next: NextFunction) => {
+      async (_req: Request, res: Response) => {
         try {
           const result = await CommentService.readAll();
           res.status(200).json(result).end();
@@ -26,7 +26,7 @@ export class CommentRouter {
 
     router.get(
       "/read-one",
-      async (req: Request, res: Response, _next: NextFunction) => {
+      async (req: Request, res: Response) => {
         try {
           const id: string = req.query.id as string;
           const result = await CommentService.readOne(id);
@@ -41,10 +41,10 @@ export class CommentRouter {
     router.post(
       "/",
       [validateAddComment],
-      async (req: Request<Comment>, res: Response, _next: NextFunction) => {
+      async (req: Request<Comment>, res: Response) => {
         try {
           const requestBody: Comment = req.body;
-          const result = CommentService.createOne(requestBody)
+          const result = await CommentService.createOne(requestBody)
           res.status(200).json(result).end();
         }  catch (error) {
           console.error("Internal server error:", error);
@@ -57,7 +57,7 @@ export class CommentRouter {
     router.put(
       "/",
       [validateUpdateComment],
-      async (req: Request<Comment>, res: Response, _next: NextFunction) => {
+      async (req: Request<Comment>, res: Response) => {
         try {
           const requestBody: Comment = req.body;
           const result = await CommentService.updateOne(requestBody);
@@ -71,7 +71,7 @@ export class CommentRouter {
 
     router.delete(
       "/",
-      async (req: Request, res: Response, _next: NextFunction) => {
+      async (req: Request, res: Response) => {
         try {
           const id: string = req.query.id as string;
           const result = await CommentService.deleteOne(id);

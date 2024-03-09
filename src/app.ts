@@ -10,6 +10,7 @@ export class Application {
       const taskRouter: TaskRouter = new TaskRouter();
       const commentRouter: CommentRouter = new CommentRouter();
       this.express = express();
+      
       this.express.use(bodyParser.json());
       this.express.use("/tasks", taskRouter.createRoutes());
       this.express.use("/comments", commentRouter.createRoutes());

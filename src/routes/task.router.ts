@@ -9,7 +9,7 @@ export class TaskRouter {
 
     router.get(
       "/",
-      async (_req: Request, res: Response, _next: NextFunction) => {
+      async (_req: Request, res: Response) => {
         try {
           const result = await TaskService.readAll();
           res.status(200).json(result).end();
@@ -22,7 +22,7 @@ export class TaskRouter {
 
     router.get(
       "/read-one",
-      async (req: Request, res: Response, _next: NextFunction) => {
+      async (req: Request, res: Response) => {
         try {
           const id: string = req.query.id as string; 
           const result = await TaskService.readOne(id);
@@ -37,7 +37,7 @@ export class TaskRouter {
     router.post(
       "/",
       [validateAddTask],
-      async (req: Request<Task>, res: Response, _next: NextFunction) => {
+      async (req: Request<Task>, res: Response) => {
         try {
           const requestBody: Task = req.body;
           const result = await TaskService.createOne(requestBody);
@@ -52,7 +52,7 @@ export class TaskRouter {
     router.put(
       "/",
       [validateUpdateTask],
-      async (req: Request<Task>, res: Response, _next: NextFunction) => {
+      async (req: Request<Task>, res: Response) => {
         try {
           const requestBody: Task = req.body;
           const result = await TaskService.updateOne(requestBody);
@@ -67,7 +67,7 @@ export class TaskRouter {
 
     router.delete(
       "/",
-      async (req: Request, res: Response, _next: NextFunction) => {
+      async (req: Request, res: Response) => {
         try {
           const id: string = req.query.id as string; 
           const result = await TaskService.deleteOne(id);
