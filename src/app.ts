@@ -4,6 +4,7 @@ import { CommentRouter } from "./routes/comment.router";
 import cors from "cors"
 import { UserRouter } from "./routes/user.router";
 import bodyParser from "body-parser";
+import authMiddleware from "./middleware/middleware.auth";
 export class Application {
   public express: Express;
 
@@ -17,9 +18,10 @@ export class Application {
       this.express.use(cors());
 
       this.express.use(bodyParser.json());
-      this.express.use("/tasks", taskRouter.createRoutes());
-      this.express.use("/comments", commentRouter.createRoutes());
       this.express.use("/users", userRouter.createRoutes());
+      this.express.use("/tasks",authMiddleware, taskRouter.createRoutes());
+      this.express.use("/comments",authMiddleware, commentRouter.createRoutes());
+
       resolve();
     });
   }
