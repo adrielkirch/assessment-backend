@@ -1,9 +1,7 @@
-import jwt, { JwtPayload } from 'jsonwebtoken'; // Import JwtPayload from jsonwebtoken
-import * as crypto from 'crypto';
+import jwt, { JwtPayload } from "jsonwebtoken"; 
+import * as crypto from "crypto";
 
 export class SecurityUtil {
-
-
   static generateJsonwebtoken(userId: string): string {
     const payload = { user: userId };
     return jwt.sign(payload, process.env.JWT_SECRET_KEY);
@@ -16,21 +14,21 @@ export class SecurityUtil {
 
   static generateHashWithSalt(data: string): string {
     return crypto
-      .createHash('sha512')
-      .update(data + process.env.SALT) // Access static variable through class name
-      .digest('hex');
+      .createHash("sha512")
+      .update(data + process.env.SALT) 
+      .digest("hex");
   }
 
   static generateHashDigitalSignature(data: string): string {
     return crypto
-      .createHash('sha512')
-      .update(data + new Date() + SecurityUtil.genRandomBytes(64)) // Access static method through class name
-      .digest('hex');
+      .createHash("sha512")
+      .update(data + new Date() + SecurityUtil.genRandomBytes(64)) 
+      .digest("hex");
   }
 
   private static genRandomBytes(len: number): string {
     const buf = crypto.randomBytes(len);
-    return buf.toString('hex');
+    return buf.toString("hex");
   }
 
   static sensiviteDataField(data: any, field: string): any {
@@ -38,5 +36,3 @@ export class SecurityUtil {
     return data;
   }
 }
-
-

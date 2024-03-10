@@ -12,11 +12,10 @@ export function validateAuth(
       requestBody &&
       typeof requestBody === "object" &&
       "email" in requestBody &&
-      "password" in requestBody 
+      "password" in requestBody
     )
   ) {
     return res.status(400).json({ error: "Invalid request body" }).end();
   }
   next();
 }
-

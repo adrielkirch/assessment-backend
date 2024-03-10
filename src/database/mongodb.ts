@@ -1,4 +1,4 @@
-import mongoose, { Connection } from 'mongoose';
+import mongoose, { Connection } from "mongoose";
 
 interface CustomConnectOptions extends mongoose.ConnectOptions {
   bufferCommands?: boolean;
@@ -19,24 +19,22 @@ class Mongodb {
   }
 
   async connect(): Promise<Connection> {
-
     if (this.db) {
       return this.db;
     }
 
-    const url = 'mongodb://127.0.0.1:27017/development';
-    
+    const url = "mongodb://127.0.0.1:27017/development";
+
     const options: CustomConnectOptions = {
-      bufferCommands: false, 
-      dbName: this.dbName, 
+      bufferCommands: false,
+      dbName: this.dbName,
     };
-    
+
     const connection = await mongoose.connect(url, options);
 
     this.db = mongoose.connection;
     return this.db;
   }
-  
 
   async getInstance(): Promise<Connection> {
     if (!this.db) {
@@ -44,9 +42,9 @@ class Mongodb {
     }
 
     if (!this.db) {
-      throw new Error('MongoDB connection not initialized');
+      throw new Error("MongoDB connection not initialized");
     }
-    
+
     return this.db;
   }
 }

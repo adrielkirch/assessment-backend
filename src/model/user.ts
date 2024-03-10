@@ -10,7 +10,7 @@ export interface User extends Document {
 const UserSchema = new Schema<User>({
   email: { type: String, required: true },
   password: { type: String, required: true },
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
 });
 
 const UserModel = mongoose.model<User>("User", UserSchema);
