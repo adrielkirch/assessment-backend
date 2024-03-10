@@ -11,13 +11,15 @@ interface CustomConnectOptions extends mongoose.ConnectOptions {
 
 class Mongodb {
   private db: Connection | null;
-
+  private dbName: string | null;
   constructor() {
     this.db = null;
+    this.dbName = process.env.NODE_ENV;
     this.connect();
   }
 
   async connect(): Promise<Connection> {
+
     if (this.db) {
       return this.db;
     }
@@ -26,7 +28,7 @@ class Mongodb {
     
     const options: CustomConnectOptions = {
       bufferCommands: false, 
-      dbName: process.env.NODE_ENV, 
+      dbName: this.dbName, 
     };
     
     const connection = await mongoose.connect(url, options);
@@ -34,6 +36,7 @@ class Mongodb {
     this.db = mongoose.connection;
     return this.db;
   }
+  
 
   async getInstance(): Promise<Connection> {
     if (!this.db) {
