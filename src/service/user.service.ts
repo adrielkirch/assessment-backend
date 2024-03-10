@@ -24,7 +24,6 @@ export class UserService {
     }
     userResult = userResult.toObject();
     const token = SecurityUtil.generateJsonwebtoken(user._id);
-    console.log("token ->", token);
     userResult.token = token;
     delete userResult.password;
     return userResult;
