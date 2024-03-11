@@ -10,6 +10,7 @@ export interface Comment extends Document {
 const CommentSchema = new Schema<Comment>({
   text: { type: String, required: true },
   taskId: { type: String, required: true },
+  userId: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
 });
 

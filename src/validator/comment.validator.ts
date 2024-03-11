@@ -12,6 +12,7 @@ export function validateAddComment(
       requestBody &&
       typeof requestBody === "object" &&
       "text" in requestBody &&
+      "userId" in requestBody &&
       "taskId" in requestBody 
     )
   ) {
@@ -32,6 +33,7 @@ export function validateUpdateComment(
       typeof requestBody === "object" &&
       "text" in requestBody &&
       "taskId" in requestBody &&
+      "userId" in requestBody &&
       "_id" in requestBody
     )
   ) {
