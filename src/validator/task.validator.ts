@@ -34,7 +34,7 @@ export function validateUpdateTask(
       "title" in requestBody &&
       "text" in requestBody &&
       "status" in requestBody &&
-      "id" in requestBody
+      "_id" in requestBody
     )
   ) {
     return res.status(400).json({ error: "Invalid request body" }).end();

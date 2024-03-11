@@ -3,11 +3,10 @@ import { TaskRepository } from "../repository/task.repository";
 
 export class TaskService {
   public static async createOne(task: Task): Promise<Task> {
-    console.log("Creating ...");
     return await TaskRepository.createOne(task);
   }
   public static async updateOne(task: Task): Promise<Task> {
-    const exist = this.readOne(task.id);
+    const exist = this.readOne(task._id);
     if (!exist) {
       throw new Error("Task not found");
     }

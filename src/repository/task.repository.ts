@@ -7,7 +7,7 @@ export class TaskRepository {
   }
   public static async updateOne(task: Task): Promise<Task> {
     const updatedTask = await TaskModel.findOneAndUpdate(
-      { _id: task.id },
+      { _id: task._id },
       task,
       { new: true }
     );
