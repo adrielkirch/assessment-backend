@@ -19,11 +19,11 @@ export class Application {
       this.express.use(bodyParser.json());
       this.express.use("/users", userRouter.createRoutes());
       this.express.use("/tasks", 
-      // authMiddleware, 
+      authMiddleware, 
       taskRouter.createRoutes());
       this.express.use(
         "/comments",
-        // authMiddleware,
+         authMiddleware,
         commentRouter.createRoutes()
       );
 

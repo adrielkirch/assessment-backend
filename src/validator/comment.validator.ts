@@ -11,11 +11,8 @@ export function validateAddComment(
     !(
       requestBody &&
       typeof requestBody === "object" &&
-      "title" in requestBody &&
       "text" in requestBody &&
-      "name" in requestBody &&
       "taskId" in requestBody 
-      // mongoose.Types.ObjectId.isValid(requestBody.taskId)
     )
   ) {
     return res.status(400).json({ error: "Invalid request body" }).end();
@@ -33,10 +30,9 @@ export function validateUpdateComment(
     !(
       requestBody &&
       typeof requestBody === "object" &&
-      "title" in requestBody &&
       "text" in requestBody &&
-      "name" in requestBody &&
-      "id" in requestBody
+      "taskId" in requestBody &&
+      "_id" in requestBody
     )
   ) {
     return res.status(400).json({ error: "Invalid request body" }).end();

@@ -13,8 +13,8 @@ export class CommentRepository {
     );
     return updatedComment;
   }
-  public static async readAll(): Promise<Comment[]> {
-    return await CommentModel.find().sort({ createdAt: -1 });
+  public static async readAll(taskId: string): Promise<Comment[]> {
+    return await CommentModel.find({ taskId }).sort({ createdAt: -1 });
   }
 
   public static async readOne(id: string): Promise<Comment> {

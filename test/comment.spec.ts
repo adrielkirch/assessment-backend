@@ -5,7 +5,8 @@ import { Task } from "../src/model/task";
 import { Comment } from "../src/model/comment";
 import { TaskService } from "../src/service/task.service";
 import { CommentService } from "../src/service/comment.service";
-const taskCreate: Task = {
+
+let taskCreate: Task = {
   id:"",
   title: "Test",
   text: "This is a test task",
@@ -13,12 +14,11 @@ const taskCreate: Task = {
 
 } as Task;
 
-const commentCreate: Comment = {
+let commentCreate: Comment = {
   id:"",
-  title: "Test",
   text: "This is a test comment",
   taskId: "",
-  name:"Sophie",
+  userId:"65ee829ec9ae6b9cd9723a00",
 } as Comment;
 
 
@@ -55,13 +55,13 @@ describe("Test service class", () => {
   });
 
   it("should read all comments and return a list", async () => {
-    const result_comments = await CommentService.readAll();
+    const result_comments = await CommentService.readAllByTaskId(taskCreate.id);
     assert.strictEqual(result_comments.length, 1);
   });
 
   it("should delete one comment and return id", async () => {
     await CommentService.deleteOne(commentCreate.id);
-    const result_comments = await CommentService.readAll();
+    const result_comments = await CommentService.readAllByTaskId(taskCreate.id);
     assert.strictEqual(result_comments.length, 0);
 
   });

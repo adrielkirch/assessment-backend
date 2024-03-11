@@ -1,6 +1,7 @@
 import { Comment } from "../model/comment";
 import { CommentRepository } from "../repository/comment.repository";
 import { TaskRepository } from "../repository/task.repository";
+
 export class CommentService {
   public static async createOne(comment: Comment): Promise<Comment> {
     const exist = await TaskRepository.readOne(comment.taskId);
@@ -9,6 +10,7 @@ export class CommentService {
     }
     return await CommentRepository.createOne(comment);
   }
+
   public static async updateOne(comment: Comment): Promise<Comment> {
     const exist = await this.readOne(comment.id);
     if (!exist) {
@@ -16,8 +18,9 @@ export class CommentService {
     }
     return await CommentRepository.updateOne(comment);
   }
-  public static async readAll(): Promise<Comment[]> {
-    return await CommentRepository.readAll();
+
+  public static async readAllByTaskId(taskId: string): Promise<Comment[]> {
+    return await CommentRepository.readAll(taskId);
   }
 
   public static async readOne(id: string): Promise<Comment> {
