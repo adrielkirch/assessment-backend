@@ -29,7 +29,7 @@ Extend the NodeJS project provided to you with the following functionality:
    - get all comments for a task (/tasks/ID/comments)
    - create a new comment belonging to a task (/tasks/ID/comments)
    - delete a comment that belongs to a task (/tasks/ID/comments/ID)
-     Return appropriate errors for the following cases:
+   -  Return appropriate errors for the following cases:
    - trying to create a comment for a task that cannot be found
    - trying to delete a comment that does not exist
    - trying to create a comment that has no text in it
@@ -58,77 +58,35 @@ NOTE: This project was set up using Node 18
 3. Test driven development using Mocha, all 12 tests should pass, run ``npm run test```
 
    ✔ should add one task and return it
+
    ✔ should read one task and return it
+
    ✔ should read all task and return a list
+
    ✔ should delete one task and return id
+
    ✔ should throw an error when reading a non-existent task
+
    ✔ should throw an error when deleting a non-existent task
+
    ✔ should add one comment and return it
+
    ✔ should read one comment and return it
+
    ✔ should read all comments and return a list
+
    ✔ should delete one comment and return id
+
    ✔ should throw an error when reading a non-existent comment
+
    ✔ should throw an error when deleting a non-existent comment
+   
 
 4.  Service-Oriented Architecture (SOA) pattern, also commonly known as a modular or layered architecture.
 
-├── app.ts
-├── database
-│   └── mongodb.ts
-├── index.ts
-├── middleware
-│   └── middleware.auth.ts
-├── model
-│   ├── comment.ts
-│   ├── task.ts
-│   └── user.ts
-├── repository
-│   ├── comment.repository.ts
-│   ├── task.repository.ts
-│   └── user.repository.ts
-├── routes
-│   ├── comment.router.ts
-│   ├── task.router.ts
-│   └── user.router.ts
-├── service
-│   ├── comment.service.ts
-│   ├── task.service.ts
-│   └── user.service.ts
-├── util
-│   └── security.util.ts
-└── validator
-    ├── comment.validator.ts
-    ├── task.validator.ts
-    └── user.validator.ts
+![image](https://github.com/adrielkirch/assessment-backend/assets/36992911/3b5789de-87a1-4845-9c15-4f55929a40a8)
 
-+-----------------+
-|       App       |
-+-----------------+
-       |   ^
-  req  v   |   res
-+-----------------+
-|   Middleware   |
-+-----------------+
-       |   ^
-  req  v   |   res
-+-----------------+
-|     Routes      |
-+-----------------+
-       |   ^
-  req  v   |   res
-+-----------------+
-|    Service      |
-+-----------------+
-       |   ^
-  req  v   |   res
-+-----------------+
-|   Repository    |
-+-----------------+
-       |   ^
-  req  v   |   res
-+-----------------+
-|   Model         |
-+-----------------+
+![image](https://github.com/adrielkirch/assessment-backend/assets/36992911/56f7b641-18a7-48be-9aeb-9bd41162b656)
 
 
 NOTE: This project was set up using Node v18.17.0
