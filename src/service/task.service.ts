@@ -10,6 +10,7 @@ export class TaskService {
     if (!exist) {
       throw new Error("Task not found");
     }
+    delete task["createdAt"]
     return await TaskRepository.updateOne(task);
   }
   public static async readAll(): Promise<Task[]> {
