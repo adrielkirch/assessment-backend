@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
-// Extend the Request interface to include a user property
 declare global {
   namespace Express {
     interface Request {
