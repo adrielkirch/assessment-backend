@@ -15,12 +15,15 @@ export class Application {
       const userRouter: UserRouter = new UserRouter();
       this.express = express();
       this.express.use(cors());
-
       this.express.use(bodyParser.json());
+
+      /* Defining Routes */
       this.express.use("/users", userRouter.createRoutes());
+
       this.express.use("/tasks", 
       authMiddleware, 
       taskRouter.createRoutes());
+
       this.express.use(
         "/comments",
          authMiddleware,
